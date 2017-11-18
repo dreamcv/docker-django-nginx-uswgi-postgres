@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<script src="dist/js/echarts.js"></script>
+</head>
+<body>
+	<div id="chart" style="width:500px;height:400px;"></div>
+</body>
+<script>
+    var myChart= echarts.init(document.getElementById('chart'));
+        $.ajax({
+	    　　url:'json.txt',
+	        success:function(data){
+	          var data=eval(data);
+	          console.log(data);
+	          op(data);
+	        }
+	    })
+    function op(data){
+    	console.log(data);
+        option = {
+			    title: {
+			        // text: '折线图堆叠'
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    xAxis: {
+			        type: 'category',
+			        boundaryGap: false,
+			        data: ['00:00','00:15','00:30','00:45','01:00','01:15','01:30'],
+			        axisLine: {
+	                     lineStyle: {
+	                        color: '#4bffff'
+	                     }
+	                  },
+	                  axisLabel: {
+	                     textStyle: {
+	                        color: '#4bffff'
+	                     }
+	                  },
+	                  axisTick: {
+	                     lineStyle: {
+	                        color: '#4bffff'
+	                     }
+	                  }
+			    },
+			    yAxis: {
+			        type: 'value',
+			        splitLine: {
+				        show: false
+				    },
+			        axisLine: {
+	                     lineStyle: {
+	                        color: '#4bffff'
+	                     }
+	                  },
+	                  axisLabel: {
+	                     textStyle: {
+	                        color: '#4bffff'
+	                     }
+	                  },
+	                  axisTick: {
+	                     lineStyle: {
+	                        color: '#4bffff'
+	                     }
+	                  }
+			    },
+			    series: [
+			        {
+			            name:'邮件营销',
+			            type:'line',
+			            stack: '总量',
+			            data:data
+			        },
+			    ]
+		};
+		setInterval(function () {
+			$.ajax({
+		    　　url:'json2.txt',
+		        success:function(data){
+		          var data=eval(data);
+		          console.log(data);
+		          op(data);
+		        }
+		    })
+		},3000)
+		myChart.setOption(option,true);
+    }
+   
+</script>
+</html>

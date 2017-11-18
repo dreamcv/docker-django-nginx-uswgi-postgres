@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../dist/js/echarts.js"></script>
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../dist/css/main1.css">
+	<link rel="stylesheet" href="../dist/css/radar.css">
+</head>
+<body>
+    <div class="head-nav">
+      <div class="row">
+         <div class="col-sm-4 col-xs-4 had-tit">数据安全监测系统</div>
+      </div>
+	</div>
+	<div class="main">
+	   <div class="f-row row">
+	      <div class="col-xs-6 col-sm-6">
+	         <div class="row row-het">
+	            <div class="col-xs-3 col-sm-3 col-line row-het">
+                  <p class="flow">今日检测流量</p>
+                  <p class="flow-cnt">24.8G</p>
+	            </div>
+	            <div class="col-sm-9 col-xs-8 col-line row-het row-no-pd">
+	               <p class="type">已检测到数据条目</p>
+	               <div class="row row-no-mg">
+	                  <div class="col-sm-6 col-line-ty col-line-ry">
+	                     <p class="p-height">征信信息:<span>34</span></p>
+	                  </div>
+	                  <div class="col-sm-6 col-line-ty">
+	                     <p class="p-height">通信内容:<span>23</span></p>
+	                  </div>
+	               </div>
+	               <div class="row row-no-mg"> 
+	                  <div class="col-sm-6 col-line-ty col-line-ry">
+	                     <p class="p-height">行踪轨迹:<span>15</span></p>
+	                  </div>
+	                  <div class="col-sm-6 col-line-ty">
+	                     <p class="p-height">财产信息:<span>16</span></p>
+	                  </div>
+	               </div>
+	               <div class="row row-no-mg">
+	                  <div class="col-sm-6 col-line-ty col-line-ry">
+	                     <p class="p-height">住宿信息:<span>56</span></p>
+	                  </div>
+	                  <div class="col-sm-6 col-line-ty">
+	                     <p class="p-height">通信记录:<span>12</span></p>
+	                  </div>
+	               </div>
+                  <div class="row row-no-mg">
+                     <div class="col-sm-6 col-xs-6 col-line-ty col-line-ry col-last">
+                        <p class="p-height">健康生理:<span>6</span></p>
+                     </div>
+                     <div class="col-sm-6 col-xs-6 col-line-ty">
+                        <p class="p-height">交易信息:<span>7</span></p>
+                     </div>
+                  </div>
+	            </div>
+	         </div>
+	         <div class="row row-het">
+	            <div class="col-sm-3 col-sm-3 col-line row-het1">
+                  <p class="flow">爬虫行为</p>
+                  <p class="flow-cnt">24.8G</p>
+	            </div>
+	            <div class="col-sm-3 col-xs-3 col-line row-het1">
+	               <p class="flow">窃取行为</p>
+                  <p class="flow-cnt">0G</p>
+	            </div>
+	            <div class="col-sm-3 col-xs-3 col-line row-het1">
+	               <p class="flow">骗取行为</p>
+                  <p class="flow-cnt">0G</p>
+	            </div>
+	            <div class="col-sm-3 col-xs-3 col-line row-het1">
+	               <p class="flow">贩卖行为</p>
+                  <p class="flow-cnt">0G</p>
+	            </div>
+	         </div>
+	      </div>
+	      <div class="col-xs-6 col-sm-6">
+            <div class="row row-het2"> 
+			      <div class="col-sm-4 col-xs-4 col-line">
+			         <div id="chart1"></div>
+			      </div>
+			      <div class="col-sm-4 col-xs-4 col-line">
+			         <div id="chart2"></div>
+			      </div>
+			      <div class="col-sm-4 col-xs-4 col-line">
+			         <div id="chart3"></div>
+			      </div>
+		      </div>
+		      <div class="row row-het3"> 
+		         <div class="col-sm-6 col-xs-6 col-line col-line-t">
+		            <div id="chart5"></div>
+		         </div>
+		         <div class="col-sm-6 col-xs-6 col-line col-line-t">
+		            <div id="chart6"></div>
+		         </div>
+		      </div>
+	      </div>
+	   </div>
+	   <div class="t-row row">
+	      <div class="col-sm-8 col-xs-8">
+	         <div id="chart4"></div>
+	      </div>
+	      <div class="col-sm-4 col-xs-4 col-right">
+	         <div class="title-p"><p>疑似数据泄漏</p></div>
+		      <div class="tit-tab">
+		         <table class="tab">
+		            <thead>
+		               <tr>
+		                  <th>时间</th>
+		                  <th>数据类型</th>
+		                  <th>源IP</th>
+		                  <th>目的IP</th>
+		                  <th>协议</th>
+		                  <th>端口</th>
+		               </tr>
+		            </thead>
+		            <tbody id="tb1">
+		               <tr>
+		                  <td>20170909</td>
+		                  <td>交通</td>
+		                  <td>192.198.198.198</td>
+		                  <td>123.123.123.123</td>
+		                  <td>tcp</td>
+		                  <td>80</td>
+		               </tr>
+		               <tr>
+		                  <td>20170909</td>
+		                   <td>交通</td>
+		                  <td>192.198.198.198</td>
+		                  <td>123.123.123.123</td>
+		                  <td>tcp</td>
+		                  <td>80</td>
+		               </tr>
+		               <tr>
+		                  <td>20170909</td>
+		                   <td>交通</td>
+		                  <td>192.198.198.198</td>
+		                  <td>123.123.123.123</td>
+		                  <td>tcp</td>
+		                  <td>80</td>
+		               </tr>
+		               <tr>
+		                  <td>20170909</td>
+		                   <td>交通</td>
+		                  <td>192.198.198.198</td>
+		                  <td>123.123.123.123</td>
+		                  <td>tcp</td>
+		                  <td>80</td>
+		               </tr>
+		               <tr>
+		                  <td>20170909</td>
+		                   <td>交通</td>
+		                  <td>192.198.198.198</td>
+		                  <td>123.123.123.123</td>
+		                  <td>tcp</td>
+		                  <td>80</td>
+		               </tr>
+		               <tr>
+		                  <td>20170909</td>
+		                  <td>交通</td>
+		                  <td>192.198.198.198</td>
+		                  <td>123.123.123.123</td>
+		                  <td>tcp</td>
+		                  <td>80</td>
+		               </tr>
+		               <tr>
+		                  <td>20170909</td>
+		                  <td>交通</td>
+		                  <td>192.198.198.198</td>
+		                  <td>123.123.123.123</td>
+		                  <td>tcp</td>
+		                  <td>80</td>
+		               </tr>
+		               <tr>
+		                  <td>20170909</td>
+		                  <td>交通</td>
+		                  <td>192.198.198.198</td>
+		                  <td>123.123.123.123</td>
+		                  <td>tcp</td>
+		                  <td>80</td>
+		               </tr>
+		            </tbody>
+		         </table>
+	         </div>
+	      </div>
+	   </div>
+	   <div class="s-row row">
+	      <div class="col-xs-3 col-sm-3"> <!--雷达图-->
+	         <div style="background: rgb(27,27,27) none repeat scroll 0% 0%; margin: 0px;">
+	            <div class="point"></div>
+			      <div class="round w300">
+			         <div class="round w200">
+			            <div class="round w100">
+			               <div class="round w1">
+			                  <div class="line roundMove line-green" id="radar"></div>
+			               </div>
+			            </div>
+			         </div>
+			      </div>
+			   </div>
+	      </div>
+	      <div class="col-xs-3 col-sm-3">
+            <div class="title-p"><p>爬虫行为</p></div>
+		      <div class="tit-tab">
+		         <table class="tab">
+		            <thead>
+		               <tr>
+		                  <th>爬虫</th>
+		                  <th>目标IP</th>
+		                  <th>源IP</th>
+		               </tr>
+		            </thead>
+		            <tbody id='tbp'>
+		               <tr>
+		                  <td>1</td>
+		                  <td>192.198.198.198</td>
+		                  <td>192.198.198.198</td>
+		               </tr>
+		               <tr>
+		                  <td>2</td>
+		                  <td>192.198.198.198</td>
+		                  <td>192.198.198.198</td>
+		               </tr>
+		               <tr>
+		                  <td>3</td>
+		                  <td>192.198.198.198</td>
+		                  <td>192.198.198.198</td>
+		               </tr>
+		               <tr>
+		                  <td>4</td>
+		                  <td>192.198.198.198</td>
+		                  <td>192.198.198.198</td>
+		               </tr>
+		               <tr>
+		                  <td>5</td>
+		                  <td>192.198.198.198</td>
+		                  <td>192.198.198.198</td>
+		               </tr>
+		               <tr>
+		                  <td>6</td>
+		                  <td>192.198.198.198</td>
+		                  <td>192.198.198.198</td>
+		               </tr>
+		               <tr>
+		                  <td>7</td>
+		                  <td>192.198.198.198</td>
+		                  <td>192.198.198.198</td>
+		               </tr>
+		               <tr>
+		                  <td>8</td>
+		                  <td>192.198.198.198</td>
+		                  <td>192.198.198.198</td>
+		               </tr>
+		            </tbody>
+		         </table>
+	         </div>
+         </div>
+         <div class="col-xs-2 col-sm-2">
+            <div class="title-p"><p>窃取行为</p></div>
+		      <div class="tit-tab">
+		         <table class="tab">
+		            <thead>
+		               <tr>
+		                  <th>目标IP</th>
+		                  <th>数据类型</th>
+		               </tr>
+		            </thead>
+		            <tbody>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>1</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>2</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>3</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>4</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>5</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>6</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>7</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>8</td>
+		               </tr>
+		            </tbody>
+		         </table>
+	         </div>
+         </div>
+	      <div class="col-xs-2 col-sm-2">
+		      <div class="title-p"><p>骗取手段</p></div>
+		      <div class="tit-tab">
+		        <table class="tab">
+		            <thead>
+		               <tr>
+		                  <th>目标IP</th>
+		                  <th>数据类型</th>
+		               </tr>
+		            </thead>
+		            <tbody>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>1</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>2</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>3</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>4</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>5</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>6</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>7</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>8</td>
+		               </tr>
+		            </tbody>
+		         </table>
+	         </div>
+	      </div>
+	      <div class="col-xs-2 col-sm-2">
+		      <div class="title-p"><p>贩卖个人信息</p></div>
+		      <div class="tit-tab">
+		         <table class="tab">
+		            <thead>
+		               <tr>
+		                  <th>目标IP</th>
+		                  <th>数据类型</th>
+		               </tr>
+		            </thead>
+		            <tbody>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>1</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>2</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>3</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>4</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>5</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>6</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>7</td>
+		               </tr>
+		               <tr>
+		                  <td>192.198.198.198</td>
+		                  <td>8</td>
+		               </tr>
+		            </tbody>
+		         </table>
+	         </div>
+	      </div>
+	   </div>
+	</div>
+</body>
+<script>
+$(".point").hide();
+// chart1
+   var myChart_a = echarts.init(document.getElementById('chart1'));
+      option_a = {
+		   tooltip : {
+		      formatter: "{a} <br/>{b} : {c}%"
+		   },
+		   series : [
+	         {
+	            name:'速度',
+	            type:'gauge',
+	            // min:0,
+	            // max:220,
+	            // splitNumber:11,
+	            radius: '90%',
+	            axisLine: {            // 坐标轴线
+	                lineStyle: {       // 属性lineStyle控制线条样式
+	                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+	                    width: 3,
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            axisLabel: {            // 坐标轴小标记
+	               show:false
+	            },
+	            axisTick: {            // 坐标轴小标记
+	                length :15,        // 属性length控制线长
+	                lineStyle: {       // 属性lineStyle控制线条样式
+	                    color: 'auto',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            splitLine: {           // 分隔线
+	                length :25,         // 属性length控制线长
+	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+	                    width:3,
+	                    color: '#fff',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            pointer: {           // 分隔线
+	                shadowColor : '#fff', //默认透明
+	                shadowBlur: 5
+	            },
+	            title : {
+	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+	                    fontWeight: 'bolder',
+	                    fontSize: 20,
+	                    color: '#fff',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            detail : {
+	               textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+	                  fontWeight: 'bolder',
+	                  fontSize: 16,
+	               }
+	            },
+	            data:[{value: 40, name: 'CPU'}]
+	         },
+	      ]
+		};
+		myChart_a.setOption(option_a);
+      setInterval(function () {
+		   option_a.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+		   myChart_a.setOption(option_a, true);
+		},2000);
+   window.onresize = myChart_a.resize;
+</script>
+<script>
+// chart2
+   var myChart_b = echarts.init(document.getElementById('chart2'));
+      option_b = {
+		   tooltip : {
+		      formatter: "{a} <br/>{b} : {c}%"
+		   },
+		   series : [
+	         {
+	            name:'速度',
+	            type:'gauge',
+	            min:0,
+	            max:220,
+	            splitNumber:11,
+	            radius: '90%',
+	            axisLine: {            // 坐标轴线
+	                lineStyle: {       // 属性lineStyle控制线条样式
+	                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+	                    width: 3,
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            axisLabel: {            // 坐标轴小标记
+	                textStyle: {       // 属性lineStyle控制线条样式
+	                    fontWeight: 'bolder',
+	                    color: '#fff',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            axisTick: {            // 坐标轴小标记
+	                length :15,        // 属性length控制线长
+	                lineStyle: {       // 属性lineStyle控制线条样式
+	                    color: 'auto',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            axisLabel: {            // 坐标轴小标记
+	               show:false
+	            },
+	            splitLine: {           // 分隔线
+	                length :25,         // 属性length控制线长
+	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+	                    width:3,
+	                    color: '#fff',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            pointer: {           // 分隔线
+	                shadowColor : '#fff', //默认透明
+	                shadowBlur: 5
+	            },
+	            title : {
+	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+	                    fontWeight: 'bolder',
+	                    fontSize: 20,
+	                    color: '#fff',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            detail : {
+	               textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+	                  fontWeight: 'bolder',
+	                  fontSize: 16,
+	               }
+	            },
+	            data:[{value: 40, name: '内存'}]
+	         },
+	      ]
+		};
+		setInterval(function () {
+		   option_b.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+		   myChart_b.setOption(option_b, true);
+		},2000);
+   myChart_b.setOption(option_b);
+   window.onresize = myChart_b.resize;
+</script>
+<script>
+// chart3
+   var myChart_c = echarts.init(document.getElementById('chart3'));
+      option_c = {
+		   tooltip : {
+		      formatter: "{a} <br/>{b} : {c}%"
+		   },
+		   series : [
+	         {
+	            name:'速度',
+	            type:'gauge',
+	            min:0,
+	            max:220,
+	            splitNumber:11,
+	            radius: '90%',
+	            axisLine: {            // 坐标轴线
+	                lineStyle: {       // 属性lineStyle控制线条样式
+	                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+	                    width: 3,
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            axisLabel: {            // 坐标轴小标记
+	                textStyle: {       // 属性lineStyle控制线条样式
+	                    fontWeight: 'bolder',
+	                    color: '#fff',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            axisTick: {            // 坐标轴小标记
+	                length :15,        // 属性length控制线长
+	                lineStyle: {       // 属性lineStyle控制线条样式
+	                    color: 'auto',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            axisLabel: {            // 坐标轴小标记
+	               show:false
+	            },
+	            splitLine: {           // 分隔线
+	                length :25,         // 属性length控制线长
+	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+	                    width:3,
+	                    color: '#fff',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            pointer: {           // 分隔线
+	                shadowColor : '#fff', //默认透明
+	                shadowBlur: 5
+	            },
+	            title : {
+	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+	                    fontWeight: 'bolder',
+	                    fontSize: 20,
+	                    color: '#fff',
+	                    shadowColor : '#fff', //默认透明
+	                    shadowBlur: 10
+	                }
+	            },
+	            detail : {
+	               textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+	                  fontWeight: 'bolder',
+	                  fontSize: 16,
+	               }
+	            },
+	            data:[{value: 40, name: '硬盘'}]
+	         },
+	      ]
+		};
+		setInterval(function () {
+		   option_c.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+		   myChart_c.setOption(option_c, true);
+		},2000);
+   myChart_c.setOption(option_c);
+   window.onresize = myChart_c.resize;
+</script>
+<script>
+// chart4
+    var myChart_d = echarts.init(document.getElementById('chart4'));
+      function randomData() {
+			now = new Date(+now + oneDay);
+			value = value + Math.random() * 21 - 10;
+			return {
+			   value: [
+			      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+			      Math.round(value)
+			   ]
+			}
+		}
+		function randomData_b() {
+			now = new Date(+now + oneDay);
+			value_b= value_b + Math.random() * 21 - 10;
+			return {
+			   value: [
+			      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+			      Math.round(value_b)
+			   ]
+			}
+		}
+		function randomData_c() {
+			now = new Date(+now + oneDay);
+			value_c= value_c + Math.random() * 21 - 10;
+			return {
+			   value: [
+			      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+			      Math.round(value_c)
+			   ]
+			}
+		}
+		function randomData_d() {
+			now = new Date(+now + oneDay);
+			value_d= value_d + Math.random() * 21 - 10;
+			return {
+			   value: [
+			      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+			      Math.round(value_d)
+			   ]
+			}
+		}
+		function randomData_e() {
+			now = new Date(+now + oneDay);
+			value_e= value_e + Math.random() * 21 - 10;
+			return {
+			   value: [
+			      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+			      Math.round(value_e)
+			   ]
+			}
+		}
+		function randomData_f() {
+			now = new Date(+now + oneDay);
+			value_f= value_f + Math.random() * 21 - 10;
+			return {
+			   value: [
+			      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+			      Math.round(value_f)
+			   ]
+			}
+		}
+		function randomData_g() {
+			now = new Date(+now + oneDay);
+			value_g= value_g + Math.random() * 21 - 10;
+			return {
+			   value: [
+			      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+			      Math.round(value_g)
+			   ]
+			}
+		}
+		function randomData_h() {
+			now = new Date(+now + oneDay);
+			value_h= value_h + Math.random() * 21 - 10;
+			return {
+			   value: [
+			      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+			      Math.round(value_h)
+			   ]
+			}
+		}
+	   var data = [];
+      var data_b=[];
+      var data_c=[];
+      var data_d=[];
+      var data_e=[];
+      var data_f=[];
+      var data_g=[];
+      var data_h=[];
+		var now = +new Date();
+		var oneDay = 24 * 3600 * 1000;
+		var value = Math.random() * 1000;
+		var value_b = Math.random()*345;
+		var value_c = Math.random()*34;
+		var value_d = Math.random()*655;
+		var value_e = Math.random()*899;
+		var value_f = Math.random()*934;
+		var value_g = Math.random()*700;
+		var value_h = Math.random()*598;
+		for (var i = 0; i < 1000; i++) {
+			data.push(randomData());
+			data_b.push(randomData_b());
+			data_c.push(randomData_c());
+			data_d.push(randomData_d());
+			data_e.push(randomData_e());
+			data_f.push(randomData_f());
+			data_g.push(randomData_g());
+			data_h.push(randomData_h());
+	   }
+		option_d = {
+			// color: [
+		 //      '#dd4444', '#fec42c'
+		 //   ],
+		   legend: {
+		      data:['模拟a','模拟b','模拟c','模拟d','模拟e','模拟f','模拟g','模拟h'],
+		      textStyle: {
+	            color: '#4bffff',
+	            fontSize: 16
+            }
+		   },
+			title: {
+			   // text: '动态数据 + 时间坐标轴',
+			   textStyle: {
+		         color: '#4bffff',
+		         fontSize:16
+		      }
+			},
+			grid: [
+		        {x: '5%', y: '5%', width: '94%', height: '80%'},
+		    ],
+			tooltip: {
+			   trigger: 'axis',
+			   axisPointer: {
+			      animation: false
+			   }
+			},
+			xAxis: {
+			   type: 'time',
+			   splitLine: {
+			      show: false
+			   },
+			   axisLine: {
+               lineStyle: {
+                  color: '#4bffff'
+               }
+            },
+            axisLabel: {
+               textStyle: {
+                  color: '#4bffff'
+               }
+            },
+            axisTick: {
+               lineStyle: {
+                  color: '#4bffff'
+               }
+            }
+			},
+			yAxis: {
+			   type: 'value',
+			   boundaryGap: [0, '100%'],
+			   splitLine: {
+			      show: false
+			   },
+			   axisLine: {
+                lineStyle: {
+                    color: '#4bffff'
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#4bffff'
+                }
+            },
+            axisTick: {
+                lineStyle: {
+                    color: '#4bffff'
+                }
+            }
+			},
+			series: [
+			   {
+				   name: '模拟a',
+				   type: 'line',
+				   data: data
+			   },
+			   {
+				   name: '模拟b',
+				   type: 'line',
+				   data: data_b
+			   }
+			   ,{
+				   name: '模拟c',
+				   type: 'line',
+				   showSymbol: false,
+				   hoverAnimation: false,
+				   data: data_c
+			   },{
+				   name: '模拟d',
+				   type: 'line',
+				   showSymbol: false,
+				   hoverAnimation: false,
+				   data: data_d
+			   },{
+				   name: '模拟e',
+				   type: 'line',
+				   showSymbol: false,
+				   hoverAnimation: false,
+				   data: data_e
+			   },{
+				   name: '模拟f',
+				   type: 'line',
+				   showSymbol: false,
+				   hoverAnimation: false,
+				   data: data_f
+			   },{
+				   name: '模拟g',
+				   type: 'line',
+				   showSymbol: false,
+				   hoverAnimation: false,
+				   data: data_g
+			   },{
+				   name: '模拟h',
+				   type: 'line',
+				   showSymbol: false,
+				   hoverAnimation: false,
+				   data: data_h
+			   }
+			]
+		};
+      setInterval(function () {
+			for (var i = 0; i < 5; i++) {
+			   data.shift();
+			   data.push(randomData());
+			   data_b.shift();
+			   data_b.push(randomData_b());
+			   data_c.shift();
+			   data_c.push(randomData_c());
+			   data_d.shift();
+			   data_d.push(randomData_d());
+			   data_e.shift();
+			   data_e.push(randomData_e());
+			   data_f.shift();
+			   data_f.push(randomData_f());
+			   data_g.shift();
+			   data_g.push(randomData_g());
+			   data_h.shift();
+			   data_h.push(randomData_h());
+			}
+			myChart_d.setOption({
+			   series: [
+			   {
+			      data: data
+			   },
+			   {
+			      data: data_b
+			   },
+			   {
+			      data: data_c
+			   },
+			   {
+			      data: data_d
+			   },
+			   {
+			      data: data_e
+			   },
+			   {
+			      data: data_f
+			   },
+			   {
+			      data: data_g
+			   },
+			   {
+			      data: data_h
+			   }
+			   ]
+			});
+		}, 1000);
+   myChart_d.setOption(option_d);
+   window.onresize = myChart_d.resize;
+</script>
+<script>
+//chart5
+   var myChart_e = echarts.init(document.getElementById('chart5'));
+		option = {
+			title:{
+				text: '协议',
+				textStyle: {
+	            color: 'rgba(75,255,255,0.2)',
+	            fontSize:18
+	         }
+			},
+			color: [
+		      'rgba(75,255,255,0.4)', 'rgba(254,196,44,0.3)', 'rgba(128,241,190,0.3)'
+		   ],
+		   tooltip: {
+		      trigger: 'item',
+		      formatter: "{a} <br/>{b}: {c} ({d}%)"
+		   },
+		   
+		   series: [
+		      {
+	            name:'访问来源',
+	            type:'pie',
+	            radius: ['55%', '70%'],
+		         center: ['50%', '50%'],
+	            data:[
+	                {value:335, name:'NetBIOS'+335},
+	                {value:310, name:'LLMNR'+310},
+	                {value:234, name:'SSDP'+234},
+	                {value:234, name:'DNS'+134},
+	                {value:234, name:'SSL '+24},
+	                {value:234, name:'HTTP'+204},
+	                {value:234, name:'Unknown'+34},
+	            ]
+		      }
+		   ]
+		};
+   myChart_e.setOption(option);
+   window.onresize = myChart_e.resize;
+</script>
+<script>
+//chart6
+   var myChart_f = echarts.init(document.getElementById('chart6'));
+      option = {
+      	title:{
+				text: '端口',
+				textStyle: {
+	            color: 'rgba(75,255,255,0.2)',
+	            fontSize:18
+	         }
+			},
+      	color: [
+		      'rgba(102,102,204,0.6)', 'rgba(02,251,245,0.6)', 'rgba(153,255,240,0.6)'
+		   ],
+		   tooltip: {
+		      trigger: 'item',
+		      formatter: "{a} <br/>{b}: {c} ({d}%)"
+		   },
+		   
+		   series: [
+		      {
+	            name:'访问来源',
+	            type:'pie',
+	            radius: ['55%', '70%'],
+		         center: ['50%', '50%'],
+	            data:[
+	                {value:335, name:'邮件'+335},
+	                {value:310, name:'联盟'+310},
+	                {value:234, name:'广告'+234}
+	            ]
+		      }
+		   ]
+		};
+   myChart_f.setOption(option);
+   window.onresize = myChart_f.resize;
+</script>
+<script>
+//疑似数据泄漏
+   var total = 0;
+   function addRow() {  
+      var tb = document.getElementById('tb'); 
+      var tr = tb.insertRow(0);  
+      var td = tr.insertCell(0);
+      var td1 = tr.insertCell(1);
+      var td2 = tr.insertCell(2);
+      var td3 = tr.insertCell(3);
+      var td4 = tr.insertCell(4);
+      var td5 = tr.insertCell(4);
+      td.innerHTML = '201708'+total;
+      td1.innerHTML = '交通';
+      td2.innerHTML = '192.0.0'+total;
+      td3.innerHTML = '127.0.0'+total;
+      td4.innerHTML = 'tcp';
+      td5.innerHTML = '44'+total;
+      var l = tb.rows.length; 
+      if (l >= 8) {  
+         tr = tb.rows[8];  
+         tr.parentNode.removeChild(tr);  
+      }  
+      total++;  
+   }
+   setInterval(function () {
+           addRow();
+        },500);
+</script>
+<script>
+// 疑似爬虫行为
+   var totalp = 0;
+   function addRowp() {  
+      var tb = document.getElementById('tbp'); 
+      var tr = tb.insertRow(0);  
+      var td = tr.insertCell(0);
+      var td1 = tr.insertCell(1);
+      var td2 = tr.insertCell(2);
+      td.innerHTML = 8+totalp;
+      td1.innerHTML = '192.0.0.'+totalp;
+      td2.innerHTML = '192.0.1.'+totalp;
+      var l = tb.rows.length; 
+      if (l >= 8) {  
+         tr = tb.rows[8];  
+         tr.parentNode.removeChild(tr);  
+      }  
+      totalp++;  
+   }
+   setInterval(function () {
+           addRowp();
+        },1000);
+</script>
+<script>
+// radar变色
+   var init=0;
+   if(init==1){
+      $("#radar").removeClass('line-green').addClass('line-red');
+      $(".point").show();
+   }else if(init==0){
+   	$("#radar").removeClass('line-red').addClass('line-green');
+   	$(".point").hide();
+   }
+</script>
+</html>

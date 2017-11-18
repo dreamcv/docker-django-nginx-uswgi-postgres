@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../plugins/datatables/jquery.dataTables.min.css">
+</head>
+<body>
+	<button id="addRow">添加一行</button>
+	<button id="romRow">删除一行</button>
+	<button id="ok">ok</button>
+	<table id="example" class="display" cellspacing="0" width="100%">
+	    <thead>
+	        <tr>
+	            <th>Column 1</th>
+	            <th>Column 1</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td><input type="checkbox"></td>
+                <td>djshksfksdjf</td>
+	        </tr>
+	        <tr>
+	            <td><input type="checkbox"></td>
+                <td>dsdsds</td>
+	        </tr>
+	    </tbody>
+	    <tfoot>
+	        <tr>
+	            <th>Column 1</th>
+	            <th>Column 1</th>
+	        </tr>
+	    </tfoot>
+	</table>
+</body>
+<script>
+$(document).ready(function() {
+    var t = $('#example').DataTable();
+    var counter = 1;
+ 
+    $('#addRow').on( 'click', function (){
+        t.row.add( [
+        	'<input type="checkbox">',
+            '<input type=/"text" name="ok" placeholder="请输入名称">',
+        ] ).draw();
+            
+        counter++;
+    });
+    var b;
+    $('#example tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            t.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            b=$(this).find("td").eq(1).html();
+        }
+    } );
+
+    $('#romRow').click( function () {
+        t.row('.selected').remove().draw( false );
+        var a = t.$('tr.selected').text();
+        console.log(a);
+        console.log(b);
+    } );
+});
+$("#ok").click(function(event) {
+	var name=[];
+	$("input[name=ok]").each(function(index, el) {
+		var _name=$(this).val()
+		name.push(_name);
+	});
+});
+</script>
+</html>

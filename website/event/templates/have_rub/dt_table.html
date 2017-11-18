@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<!--
+	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
+	-->
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+	<title>数据库搜索</title>
+	<link rel="stylesheet" type="text/css" href="/static/dtable/media/css/jquery.dataTables.css">
+
+	<style type="text/css" class="init"></style>
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript" language="javascript" src="/static/dtable/media/js/jquery.dataTables.js"></script>
+
+    {% if sql %}
+	<script type="text/javascript" language="javascript" class="init">
+		$(document).ready(function() {
+			$.ajax({
+				type:"GET",
+				url:"/dtb/json/sql={{sql}}", //测试用,test_list
+				dataType:"json",
+				//data: {dat:dict},
+				success:function(res){
+					var heads = res.heads
+					var columns = new Array()
+
+					var head_tr = document.getElementById("origin_tr")
+					var tr_inner_html = ""
+					for(var i=0; i<heads.length; i++){
+						columns.push({"data": heads[i]})
+						tr_inner_html +=  "<th>" +  heads[i] + "</th>" + "\n"
+					}
+					head_tr.innerHTML = tr_inner_html
+					// 注意这里可以直接用 ajax 但是不利于管理。
+					$('#example').DataTable({
+						"data": res.data,
+						"columns": columns,
+					});
+				}
+			});
+
+		} );
+	</script>
+	{% endif %}
+</head>
+<body class="dt-example">
+
+    <form action="/dtb/" method="post">
+        {% csrf_token %}
+       <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">搜索语句</label>
+        <div class="layui-input-block">
+          <textarea cols="80" rows="3" placeholder="请输入sql语句内容" class="layui-textarea" name="sql"></textarea>
+        </div>
+      </div>
+
+        <input id="sub" type="submit" value="搜索" >
+
+    </form>
+	{% if error %}
+    <h2 class="foot-size: 19px"> {{ error }} </h2>
+	{% endif %}
+			<table id="example" class="display" cellspacing="0" width="100%">
+				<thead>
+					<tr id="origin_tr">
+
+					</tr>
+				</thead>
+			</table>
+
+</body>
+</html>

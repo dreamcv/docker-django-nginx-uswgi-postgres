@@ -1,0 +1,54 @@
+version: '3'
+services:
+    mysqldb:
+      image: mysql
+      restart: always
+      expose:
+        - "3306"
+      volumes:
+        - ./mysql_data:/var/lib/mysql
+      environment:
+        - MYSQL_DATABASE=mysitedb
+        - MYSQL_ROOT_PASSWORD=112233..
+
+    db:
+      container_name: postgres
+      image: postgres
+      environment:
+        POSTGRES_PASSWORD: password123
+      ports:
+        - "5432:5432"
+        # (HOST:CONTAINER)
+      volumes:
+        - pgdata:/var/lib/postgresql/data/
+
+    nginx:
+        container_name: nginx-container
+        build: ./nginx
+        restart: always
+        ports:
+        - "8080:80"
+        volumes:
+        - api_data:/docker_api
+        - ./log:/var/log/nginx
+        depends_on:
+        - api
+
+    proj:
+        container_name: api-container
+        build: ./proj
+        restart: always
+        # command: uwsgi  --emperor uwsgi.ini
+        command: uwsgi --ini uwsgi.ini
+        ports:
+        - "8002:8000"
+        volumes:
+        - api_data:/docker_api
+        depends_on:
+        - db
+
+volumes:
+    api_data:
+    pgdata:
+    mysql_data:
+

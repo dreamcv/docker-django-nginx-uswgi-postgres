@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据泄露</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="Cache-Control" content="max-age=7200" />
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugins/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../plugins/datatables/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+  </head>
+  <body>
+    <!-- Content Wrapper. Contains page content -->
+     <div class="">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+         数据检测
+          <!-- <small>Control panel</small> -->
+        </h1>
+        
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-7 connectedSortable">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+              <div class="col-lg-6 col-xs-9">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                  <div class="inner">
+                    <h3>150<sup style="font-size: 20px">条</sup></h3>
+                    <p>数据总条目</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-bar-chart"></i>
+                  </div>
+                  <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div><!-- ./col -->
+              <div class="col-lg-6 col-xs-9">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                  <div class="inner">
+                    <h3>53<sup style="font-size: 20px">条</sup></h3>
+                    <p>今日条目</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-pie-chart"></i>
+                  </div>
+                  <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div><!-- ./col -->
+            </div><!-- /.row -->
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="nav-tabs-custom">
+              <!-- Tabs within a box -->
+              <ul class="nav nav-tabs pull-right">
+                <li class="pull-left header"><i class="fa fa-inbox"></i> 记录</li>
+              </ul>
+              <div class="tab-content">
+                <table id="logs" class="logs"></table>
+              </div>
+            </div><!-- /.nav-tabs-custom -->
+
+          </section><!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          <section class="col-lg-5 connectedSortable">
+
+            <div class="box box-warning box-solid">
+              <div class="box-header with-border">
+                <i class="fa fa-th"></i>
+                <h3 class="box-title">数据类型</h3>
+                <div class="box-tools pull-right">
+                   <button class="btn btn-default btn-xs daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i> 管理</button>
+                </div><!-- /.box-tools -->
+              </div><!-- /.box-header -->
+              <div class="box-body">
+                <ul class="list-group list-group-unbordered">
+                  <li class="list-group-item">
+                    <b>PMS数据类型</b> <a class="pull-right"></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>数据类型一</b> <a class="pull-right">自定义</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>数据类型二</b> <a class="pull-right">自定义</a>
+                  </li>
+                </ul>
+              </div><!-- /.box-body -->
+            </div><!-- /.box -->
+            
+            <!-- solid sales graph -->
+            <div class="box box-solid bg-teal-gradient">
+              <div class="box-header">
+                <i class="fa fa-th"></i>
+                <h3 class="box-title">统计</h3>
+              </div>
+              <div class="box-body border-radius-none">
+                <div id="d_chart1" style="width:100%;height:300px;top:-30px"></div>
+              </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+            <!-- Map box -->
+            <div class="box box-solid bg-light-blue-gradient">
+              <div class="box-header">
+                <i class="fa fa-map-marker"></i>
+                <h3 class="box-title">
+                  地图
+                </h3>
+              </div>
+              <div class="box-body">
+                <div id="container" style="height:300px;width:100%;"></div>
+              </div><!-- /.box-body-->
+            </div>
+            <!-- /.box -->
+            
+          </section><!-- right col -->
+        </div><!-- /.row (main row) -->
+
+      </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/echarts.js"></script>
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/map/js/world.js"></script>
+  </body>
+  <script>
+    var arr=[
+              ["2017/08/21","交通","192.168.36.3","192.36.53.98","445"],
+              ["2017/09/08","交通","192.5.6.3","192.5.3.6","223"],
+              ["2017/09/10","交通","187.23.45.6","136.3.6.9","8808"],
+              ["2017/08/11","交通","192.168.0.1","187.23.45.6","443"],
+              ["2017/09/12","交通","192.168.0.1","187.23.45.6","112"],
+              ["2017/09/13","交通","192.168.0.1","187.23.45.6","556"],
+              ["2017/09/14","交通","192.168.0.1","187.23.45.6","224"],
+              ["2017/09/15","交通","192.168.0.1","187.23.45.6","1120"],
+              ["2017/09/16","交通","192.168.0.1","187.23.45.6","554"],
+              ["2017/09/17","交通","192.168.0.1","187.23.45.6","1125"],
+              ["2017/09/18","交通","192.168.0.1","187.23.45.6","557"],
+    ]
+    $('#logs').DataTable( {
+            ordering: false,
+            data: arr,
+            columns: [
+                { title: "时间" },
+                { title: "数据类型" },
+                { title: "泄漏源" },
+                { title: "流向IP"},
+                { title: "端口"},
+            ],
+            oLanguage : {
+                    "sProcessing" : "正在加载中......",
+                    "sLengthMenu" : "每页显示 _MENU_ 条记录",
+                    "sZeroRecords" : "没有数据！",
+                    "sEmptyTable" : "表中无数据存在！",
+                    "sInfo" : "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+                    "sInfoEmpty" : "显示0到0条记录",
+                    "sInfoFiltered" : "数据表中共为 _MAX_ 条记录",
+                    "sSearch" : "搜索",
+                    "oPaginate" : {
+                        "sFirst" : "首页",
+                        "sPrevious" : "上一页",
+                        "sNext" : "下一页",
+                        "sLast" : "末页"
+                    }
+                }
+        } );
+  </script>
+  <script>
+  // d_chart1
+    var myChart_e = echarts.init(document.getElementById('d_chart1'));
+       option = {
+          color: ['#ffffff'],
+          grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '0%',
+                top:'-30px',
+                height: '100%',
+                containLabel: true
+          },
+          tooltip : {
+              trigger: 'axis',
+              axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                  type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+              }
+          },
+          grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+          },
+          xAxis : [
+              {
+                  type : 'category',
+                  data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                  axisTick: {
+                      alignWithLabel: true
+                  },
+                  axisLine: {
+                     lineStyle: {
+                        color: '#ffffff'
+                     }
+                  },
+                  axisLabel: {
+                     textStyle: {
+                        color: '#ffffff'
+                     }
+                  },
+                  axisTick: {
+                     lineStyle: {
+                        color: '#ffffff'
+                     }
+                  }
+              }
+          ],
+          yAxis : [
+              {
+                  type : 'value',
+                  // show: false,
+                  splitLine: {
+                    show: true
+                  },
+                  axisLine: {show: false},
+                  axisTick: {
+                    show: false
+                  },
+                  axisLabel: {
+                     textStyle: {
+                        color: '#ffffff'
+                     }
+                  },
+              }
+          ],
+          series : [
+              {
+                  name:'直接访问',
+                  type:'bar',
+                  barWidth: '60%',
+                  data:[10, 52, 200, 334, 390, 330, 220]
+              }
+          ]
+      };
+    myChart_e.setOption(option);
+    window.onresize = myChart_e.resize;
+  </script>
+  <script>
+  // container
+    var dom = document.getElementById("container");
+          var myChart = echarts.init(dom);
+          var app = {};
+          option = null;
+          var nameMap = {
+              'Afghanistan':'阿富汗',
+              'Angola':'安哥拉',
+              'Albania':'阿尔巴尼亚',
+              'United Arab Emirates':'阿联酋',
+              'Argentina':'阿根廷',
+              'Armenia':'亚美尼亚',
+              'French Southern and Antarctic Lands':'法属南半球和南极领地',
+              'Australia':'澳大利亚',
+              'Austria':'奥地利',
+              'Azerbaijan':'阿塞拜疆',
+              'Burundi':'布隆迪',
+              'Belgium':'比利时',
+              'Benin':'贝宁',
+              'Burkina Faso':'布基纳法索',
+              'Bangladesh':'孟加拉国',
+              'Bulgaria':'保加利亚',
+              'The Bahamas':'巴哈马',
+              'Bosnia and Herzegovina':'波斯尼亚和黑塞哥维那',
+              'Belarus':'白俄罗斯',
+              'Belize':'伯利兹',
+              'Bermuda':'百慕大',
+              'Bolivia':'玻利维亚',
+              'Brazil':'巴西',
+              'Brunei':'文莱',
+              'Bhutan':'不丹',
+              'Botswana':'博茨瓦纳',
+              'Central African Republic':'中非共和国',
+              'Canada':'加拿大',
+              'Switzerland':'瑞士',
+              'Chile':'智利',
+              'China':'中国',
+              'Ivory Coast':'象牙海岸',
+              'Cameroon':'喀麦隆',
+              'Democratic Republic of the Congo':'刚果民主共和国',
+              'Republic of the Congo':'刚果共和国',
+              'Colombia':'哥伦比亚',
+              'Costa Rica':'哥斯达黎加',
+              'Cuba':'古巴',
+              'Northern Cyprus':'北塞浦路斯',
+              'Cyprus':'塞浦路斯',
+              'Czech Republic':'捷克共和国',
+              'Germany':'德国',
+              'Djibouti':'吉布提',
+              'Denmark':'丹麦',
+              'Dominican Republic':'多明尼加共和国',
+              'Algeria':'阿尔及利亚',
+              'Ecuador':'厄瓜多尔',
+              'Egypt':'埃及',
+              'Eritrea':'厄立特里亚',
+              'Spain':'西班牙',
+              'Estonia':'爱沙尼亚',
+              'Ethiopia':'埃塞俄比亚',
+              'Finland':'芬兰',
+              'Fiji':'斐',
+              'Falkland Islands':'福克兰群岛',
+              'France':'法国',
+              'Gabon':'加蓬',
+              'United Kingdom':'英国',
+              'Georgia':'格鲁吉亚',
+              'Ghana':'加纳',
+              'Guinea':'几内亚',
+              'Gambia':'冈比亚',
+              'Guinea Bissau':'几内亚比绍',
+              'Equatorial Guinea':'赤道几内亚',
+              'Greece':'希腊',
+              'Greenland':'格陵兰',
+              'Guatemala':'危地马拉',
+              'French Guiana':'法属圭亚那',
+              'Guyana':'圭亚那',
+              'Honduras':'洪都拉斯',
+              'Croatia':'克罗地亚',
+              'Haiti':'海地',
+              'Hungary':'匈牙利',
+              'Indonesia':'印尼',
+              'India':'印度',
+              'Ireland':'爱尔兰',
+              'Iran':'伊朗',
+              'Iraq':'伊拉克',
+              'Iceland':'冰岛',
+              'Israel':'以色列',
+              'Italy':'意大利',
+              'Jamaica':'牙买加',
+              'Jordan':'约旦',
+              'Japan':'日本',
+              'Kazakhstan':'哈萨克斯坦',
+              'Kenya':'肯尼亚',
+              'Kyrgyzstan':'吉尔吉斯斯坦',
+              'Cambodia':'柬埔寨',
+              'South Korea':'韩国',
+              'Kosovo':'科索沃',
+              'Kuwait':'科威特',
+              'Laos':'老挝',
+              'Lebanon':'黎巴嫩',
+              'Liberia':'利比里亚',
+              'Libya':'利比亚',
+              'Sri Lanka':'斯里兰卡',
+              'Lesotho':'莱索托',
+              'Lithuania':'立陶宛',
+              'Luxembourg':'卢森堡',
+              'Latvia':'拉脱维亚',
+              'Morocco':'摩洛哥',
+              'Moldova':'摩尔多瓦',
+              'Madagascar':'马达加斯加',
+              'Mexico':'墨西哥',
+              'Macedonia':'马其顿',
+              'Mali':'马里',
+              'Myanmar':'缅甸',
+              'Montenegro':'黑山',
+              'Mongolia':'蒙古',
+              'Mozambique':'莫桑比克',
+              'Mauritania':'毛里塔尼亚',
+              'Malawi':'马拉维',
+              'Malaysia':'马来西亚',
+              'Namibia':'纳米比亚',
+              'New Caledonia':'新喀里多尼亚',
+              'Niger':'尼日尔',
+              'Nigeria':'尼日利亚',
+              'Nicaragua':'尼加拉瓜',
+              'Netherlands':'荷兰',
+              'Norway':'挪威',
+              'Nepal':'尼泊尔',
+              'New Zealand':'新西兰',
+              'Oman':'阿曼',
+              'Pakistan':'巴基斯坦',
+              'Panama':'巴拿马',
+              'Peru':'秘鲁',
+              'Philippines':'菲律宾',
+              'Papua New Guinea':'巴布亚新几内亚',
+              'Poland':'波兰',
+              'Puerto Rico':'波多黎各',
+              'North Korea':'北朝鲜',
+              'Portugal':'葡萄牙',
+              'Paraguay':'巴拉圭',
+              'Qatar':'卡塔尔',
+              'Romania':'罗马尼亚',
+              'Russia':'俄罗斯',
+              'Rwanda':'卢旺达',
+              'Western Sahara':'西撒哈拉',
+              'Saudi Arabia':'沙特阿拉伯',
+              'Sudan':'苏丹',
+              'South Sudan':'南苏丹',
+              'Senegal':'塞内加尔',
+              'Solomon Islands':'所罗门群岛',
+              'Sierra Leone':'塞拉利昂',
+              'El Salvador':'萨尔瓦多',
+              'Somaliland':'索马里兰',
+              'Somalia':'索马里',
+              'Republic of Serbia':'塞尔维亚共和国',
+              'Suriname':'苏里南',
+              'Slovakia':'斯洛伐克',
+              'Slovenia':'斯洛文尼亚',
+              'Sweden':'瑞典',
+              'Swaziland':'斯威士兰',
+              'Syria':'叙利亚',
+              'Chad':'乍得',
+              'Togo':'多哥',
+              'Thailand':'泰国',
+              'Tajikistan':'塔吉克斯坦',
+              'Turkmenistan':'土库曼斯坦',
+              'East Timor':'东帝汶',
+              'Trinidad and Tobago':'特里尼达和多巴哥',
+              'Tunisia':'突尼斯',
+              'Turkey':'土耳其',
+              'United Republic of Tanzania':'坦桑尼亚联合共和国',
+              'Uganda':'乌干达',
+              'Ukraine':'乌克兰',
+              'Uruguay':'乌拉圭',
+              'United States of America':'美国',
+              'Uzbekistan':'乌兹别克斯坦',
+              'Venezuela':'委内瑞拉',
+              'Vietnam':'越南',
+              'Vanuatu':'瓦努阿图',
+              'West Bank':'西岸',
+              'Yemen':'也门',
+              'South Africa':'南非',
+              'Zambia':'赞比亚',
+              'Zimbabwe':'津巴布韦'
+          };
+
+          option = {
+              tooltip: {
+                  trigger: 'item',
+                  formatter: '{b}'
+              },
+              geo: [
+                  {
+                      name: '世界地图',
+                      type: 'map',
+                      map: 'world',
+                      roam: true,
+                      selectedMode : 'single',
+                      label:{
+                          normal: {
+                              show:false,
+                              // formatter: function (params) {
+                              //     return nameMap[params.name];
+                              // }
+                          },
+                          emphasis: {
+                              label:{
+                                  show:true
+                              }
+                          }
+                      }
+                  }
+              ],
+              series: []
+          };;
+          if (option && typeof option === "object") {
+              myChart.setOption(option, true);
+          }
+  </script>
+</html>

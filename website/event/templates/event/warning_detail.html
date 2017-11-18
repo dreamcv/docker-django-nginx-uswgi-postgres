@@ -1,0 +1,237 @@
+{% load event_tag %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据泄露</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- <meta http-equiv="Cache-Control" content="max-age=7200" /> -->
+    <!-- <link rel="stylesheet" href="../plugins/datatables/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css"> -->
+    <script src='/static/dist/js/timeline.js'></script>
+    <link rel="stylesheet" href="/static/dist/css/timeline.css">
+    <link rel="stylesheet" href="/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <script src="/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <style>
+      body{
+        min-height: 100%;
+        background-color: #ecf0f5;
+        z-index: 800;
+      }
+      .filling_line{
+        transform:scaleX(0.0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Content Wrapper. Contains page content -->
+     <div class="">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+         预警详情
+          <!-- <small>Control panel</small> -->
+        </h1>
+
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-8 connectedSortable">
+            <!-- 水平时间轴 -->
+            <div class="box box-danger">
+              <div class="box-header with-border">
+                <i class="fa fa-warning"></i>
+                <h3 class="box-title">预警处置</h3>
+              </div><!-- /.box-header -->
+              <div class="box-body">
+                <div class="time_line_box">
+                 <div class="time_line" style="width:100%;">
+                  <div class="time_line_background" style="transform:scaleX(0.97); ">
+                    <span class="filling_line"></span>
+                    <ol  class="ol">
+                      <li><a   class="order_item" style="left:0%;"></a></li>
+                      <li><div class="order_item" style="left:32%;"></div></li>
+                      <li><div   class="order_item" style="left:65%;"></div></li>
+                      <li><div  class="order_item" style="left:98%;"></div></li>
+                    </ol>
+                  </div>
+                  <ol>
+                    <li><a  class="text_item"  style="left:0%;">发生</a></li>
+                    <li><a  class="text_item"  style="left:31%;">签收</a></li>
+                    <li><a  class="text_item"  style="left:62%;">处理</a></li>
+                    <li><a  class="text_item"  style="left:93%;">完成</a></li>
+                  </ol>
+                 </div>
+                </div>
+              </div><!-- /.box-body -->
+            </div><!-- /.box -->
+            <!-- 处置部分 -->
+            <div class="row">
+              <div class="col-md-4">
+                <!-- 判例 -->
+                <div class="box box-info">
+                  <div class="box-header with-border">
+                    <i class="fa fa-bullhorn"></i>
+                    <h3 class="box-title">处置案例</h3>
+                  </div><!-- /.box-header -->
+                  <div class="box-body">
+
+                    {% block events %}
+
+                    {% for data in hisory_del_sets %}
+                    <div class="callout callout-default">
+                      <h4>{{ data.event_cate }} {{ data.happened_date }}</h4>
+                      <p>{{ data.event_name }}</p>
+                      </br>
+                      <p> <strong>{{ data.extra_add }} </strong></p>
+                    </br>
+                      (操作员:{{ data.opreater_name }})
+                    </div>
+                   {% endfor %}
+
+                    {% endblock %}
+
+
+
+                  </div><!-- /.box-body -->
+                </div><!-- /.box -->
+              </div>
+              <!-- 处置详情 -->
+              <div class="col-md-8">
+                <div class="box box-primary">
+                  <div class="box-header with-border">
+                    <h3 id="commit_callback" class="box-title">提交处理建议</h3>
+                  </div><!-- /.box-header -->
+                  <div class="box-body">
+
+                    {% block commit_response %}
+                    <div>
+                      <div class="form-group">
+                        <label>处置建议</label>
+                        <textarea id="extra" class="form-control" style="height: 80px"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <button class="btn btn-default" id="submail"><i class="fa fa-pencil"></i>寻求帮助</button>
+                        <div class="pull-right">
+                        <button type="submit" id="commit_own" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 完成</button>
+                      </div>
+                      </div>
+                    </div>
+
+
+                    <script type="text/javascript" language="javascript" class="init">
+                        $("#commit_own").click(function () {
+                            var e_id = {{ e_id }};
+                            // 这里用#id出错了
+                            var extra = document.getElementById("extra").value;
+
+                            $.ajax({
+                                type:"GET",
+                                url:"/warning_del/?e_id="+ e_id +"&extra="+extra, //测试用,test_list
+                                dataType:"text",
+                                //data: {dat:dict},
+                                success:function(res){
+                                    //console.log("已经提交")
+                                     $("#commit_callback").text(res);
+                                    run(2);
+                                }
+                            });
+
+                        })
+                    </script>
+
+                    {% endblock %}
+
+
+                      {% block send_mail %}
+                    <div id="mail">
+                      <div class="form-group">
+                        <input id="geter" class="form-control" placeholder="收件人:">
+                      </div>
+                      <div class="form-group">
+                        <textarea id="compose-textarea" class="form-control" style="height: 300px">
+                          <h1> 自己添加内容 </h1>
+                        </textarea>
+                      </div>
+                      <div class="form-group pull-right">
+                        <button type="submit" id="send_email" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 发送</button>
+                      </div>
+                      <script type="text/javascript" language="javascript" class="init">
+                          $("#send_email").click(function () {
+                              var geter = document.getElementById("geter").value;;
+                              // 这里用#id出错了
+                              var subject = document.getElementById("compose-textarea").value;
+
+                              $.ajax({
+                                  type:"GET",
+                                  url:"/send_email/?geter="+ geter +"&subject="+subject, //测试用,test_list
+                                  dataType:"text",
+                                  //data: {dat:dict},
+                                  success:function(res){
+                                      console.log("已经提交")
+                                      alert(res);
+                                  }
+                              });
+                          })
+                      </script>
+
+
+                    </div>
+
+                    {% endblock %}
+                  </div><!-- /.box-body -->
+
+                </div><!-- /. box -->
+              </div>
+            </div>
+          </section><!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          <section class="col-lg-4 connectedSortable">
+            <!-- 垂直时间轴 处置详情 -->
+            <div class="box box-success">
+              <div class="box-header with-border">
+                <i class="fa fa-inbox"></i>
+                <h3 class="box-title">预警处置详情</h3>
+              </div><!-- /.box-header -->
+
+<!-- 该记录的历史日志  -->
+              {% block e_history %}
+             {{ e_id | deled_detail_by_eid | safe }}
+              {% endblock %}
+<!-- /.box-body -->
+
+            </div><!-- /.box -->
+
+          </section><!-- right col -->
+        </div><!-- /.row (main row) -->
+
+      </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+    <!-- <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script> -->
+  </body>
+  <script>
+    $("#mail").hide();
+    $("#submail").click(function(event) {
+      $("#mail").slideDown('10', function() {
+
+      });
+    });
+    run(0);
+    run(1);
+
+    {{ e_id | is_in_deled }}
+      $(function () {
+        //Add text editor
+        $("#compose-textarea").wysihtml5();
+      });
+  </script>
+
+
+
+</html>

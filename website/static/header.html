@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>header</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="dist/css/main.css">
+    <link rel="stylesheet" href="dist/css/radar.css">
+  </head>
+  <body>
+     <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper main">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="f-row row">
+            <div class="col-xs-7 col-sm-7">
+               <div class="row row-het">
+                  <div class="col-xs-3 col-sm-3 col-line row-het">
+                      <!-- <p class="flow">今日检测流量</p> -->
+                      <!-- <p class="flow-cnt">24.8G</p> -->
+                    <div class="row title-p1">
+                      <div class="col-sm-12 col-xs-12"><p>已检测流量</p></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-6 col-line row-tab">
+                        <p class="flow">总计</p>
+                        <p class="flow-cnt"><span name="all">50M</span></p>
+                      </div>
+                      <div class="col-xs-6 col-sm-6 col-line row-tab">
+                        <p class="flow">今日</p>
+                        <p class="flow-cnt"><span name="today">30M</span></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-9 col-xs-8 col-line row-het">
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-6 col-line row-het-l">
+                        <div class="row title-p2">
+                          <div class="col-sm-12 col-xs-12"><p>已检测数据条目</p></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-line row-tab1">
+                            <p class="flow1">总计</p>
+                            <p class="flow1-cnt"><span name="all"></span>条</p>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-line row-tab1">
+                            <p class="flow1">今日</p>
+                            <p class="flow1-cnt"><span name="today"></span>条</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6 col-sm-6 col-line row-het-l">
+                        <div class="row title-p2">
+                          <div class="col-sm-12 col-xs-12"><p>已保存数据</p></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-line row-tab1">
+                            <p class="flow1">总计</p>
+                            <p class="flow1-cnt"><span name="all"></span></p>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-line row-tab1">
+                            <p class="flow1">今日</p>
+                            <p class="flow1-cnt"><span name="today"></span></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="row row-het-l">
+                      <div class="col-xs-6 col-sm-6 col-line row-het-l">
+                        <div class="row title-p2">
+                          <div class="col-sm-12 col-xs-12"><p>爬虫行为</p></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-line row-tab1">
+                            <p class="flow1">总计</p>
+                            <p class="flow1-cnt"><span name="all"></span>条</p>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-line row-tab1">
+                            <p class="flow1">今日</p>
+                            <p class="flow1-cnt"><span name="today"></span>条</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6 col-sm-6 col-line row-het-l">
+                        <div class="row title-p2">
+                          <div class="col-sm-12 col-xs-12"><p>窃取行为</p></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-line row-tab1">
+                            <p class="flow1">总计</p>
+                            <p class="flow1-cnt"><span name="all"></span>条</p>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-line row-tab1">
+                            <p class="flow1">今日</p>
+                            <p class="flow1-cnt"><span name="today"></span>条</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xs-5 col-sm-5">
+                <div class="row title-p2">
+                  <div class="col-sm-12 col-xs-12"><p>服务器性能</p></div>
+                </div>
+                <div class="row row-het">
+                  <div class="col-sm-4 col-xs-4 col-line row-no-pd">
+                     <div id="chart1"></div>
+                  </div>
+                  <div class="col-sm-4 col-xs-4 col-line row-no-pd">
+                     <div id="chart2"></div>
+                  </div>
+                  <div class="col-sm-4 col-xs-4 col-line row-no-pd">
+                     <div id="chart3"></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="t-row row">
+            <div class="col-xs-5 col-sm-5">
+              <p class="p-chart">
+                <span id="char_hor" class="char-ac">即时流量</span>
+                <span id="char_day">统计流量</span>
+              </p>
+              <div id="chart4"></div>
+              <!-- <div id="chart7"></div> -->
+            </div>
+            <div class="col-xs-4 col-sm-4">
+              <div id="chart5"></div>
+            </div>
+            <div class="col-xs-3 col-xm-3">
+              <div class="title-p">
+                <p>模块监测<span><span class="green">绿色</span>正常，<span class="red">红色</span>异常</span></p>
+              </div>
+              <div class="tit-tab1">
+                <table class="tab1">
+                    <tbody id='tbp'>
+                       <tr>
+                          <td>监测模块</td>
+                          <td><div class="point-green" name="modal"></div></td>
+                       </tr>
+                       <tr>
+                          <td>报表模块</td>
+                          <td><div class="point-green"  name="modal"></div></td>
+                       </tr>
+                       <tr>
+                          <td>策略模块</td>
+                          <td><div class="point-green"  name="modal"></div></td>
+                       </tr>
+                       <tr>
+                          <td>日志模块</td>
+                          <td><div class="point-green" name="modal"></div></td>
+                       </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="s-row row">
+            <div class="col-xs-4 col-sm-4"> <!--雷达图-->
+              <div style="background: rgb(27,27,27) none repeat scroll 0% 0%; margin: 0px;">
+                <div class="point"></div>
+                <div class="round w300">
+                   <div class="round w200">
+                      <div class="round w100">
+                         <div class="round w1">
+                            <div class="line roundMove line-green" id="radar"></div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 col-xs-4 col-right">
+              <div class="title-p"><p>疑似数据泄漏</p></div>
+              <div class="tit-tab">
+                 <table class="tab">
+                    <thead>
+                       <tr>
+                          <th>时间</th>
+                          <th>数据类型</th>
+                          <th>泄漏源</th>
+                          <th>流向IP</th>
+                          <th>端口</th>
+                       </tr>
+                    </thead>
+                    <tbody id="tb">
+                       <tr>
+                          <td>20170909</td>
+                          <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                          <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr> 
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr> 
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                       <tr>
+                          <td>20170909</td>
+                           <td>交通</td>
+                          <td>192.198.198.198</td>
+                          <td>123.123.123.123</td>
+                          <td>80</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-4">
+              <div class="title-p"><p>爬虫行为</p></div>
+              <div class="tit-tab">
+                <table class="tab">
+                    <thead>
+                       <tr>
+                          <th>次数</th>
+                          <th>爬虫IP</th>
+                          <th>爬取对象</th>
+                       </tr>
+                    </thead>
+                    <tbody id='tbp'>
+                       <tr>
+                          <td>1</td>
+                          <td>192.198.198.198</td>
+                          <td>192.198.198.198</td>
+                       </tr>
+                       <tr>
+                          <td>2</td>
+                          <td>192.198.198.198</td>
+                          <td>192.198.198.198</td>
+                       </tr>
+                       <tr>
+                          <td>3</td>
+                          <td>192.198.198.198</td>
+                          <td>192.198.198.198</td>
+                       </tr>
+                       <tr>
+                          <td>4</td>
+                          <td>192.198.198.198</td>
+                          <td>192.198.198.198</td>
+                       </tr>
+                       <tr>
+                          <td>5</td>
+                          <td>192.198.198.198</td>
+                          <td>192.198.198.198</td>
+                       </tr>
+                    </tbody>
+                </table>
+              </div>
+              <div class="title-p" style="margin-top:6px;"><p>窃取行为</p></div>
+              <div class="tit-tab">
+                <table class="tab">
+                    <thead>
+                       <tr>
+                          <th>时间</th>
+                          <th>方式</th>
+                          <th>目标IP</th>
+                          <th>攻击方</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                       <tr>
+                          <td>09/07/17</td>
+                          <td>1</td>
+                          <td>192.198.198.198</td>
+                          <td>192.1.0.0</td>
+                       </tr>
+                       <tr>
+                          <td>09/07/17</td>
+                          <td>2</td>
+                          <td>192.198.198.198</td>
+                          <td>192.1.0.0</td>
+                       </tr>
+                       <tr>
+                          <td>09/07/17</td>
+                          <td>3</td>
+                          <td>192.198.198.198</td>
+                          <td>192.1.0.0</td>
+                       </tr>
+                       <tr>
+                          <td>09/07/17</td>
+                          <td>4</td>
+                          <td>192.198.198.198</td>
+                          <td>192.1.0.0</td>
+                       </tr>
+                       <tr>
+                          <td>09/07/17</td>
+                          <td>5</td>
+                          <td>192.198.198.198</td>
+                          <td>192.1.0.0</td>
+                       </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+         </div>
+        </section>
+      </div><!-- /.content-wrapper -->
+     
+  </body>
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="dist/js/echarts.js"></script>
+<script>
+  var session="XXX";
+    $.ajax({
+    　　url:'/composite/type-total/'+session,
+        type: 'GET',
+        dataType:'json',
+        success:function(data){
+          var obj=data.results;
+          $("span[name=all]:eq(0)").html(obj[0][0]);
+          $("span[name=today]:eq(0)").html(obj[0][1]);
+          $("span[name=all]:eq(2)").html(obj[1][2]);
+          $("span[name=today]:eq(2)").html(obj[1][1]);
+          var obj1=obj[2][1];
+          $("span[name=all]:eq(1)").html(obj1[0][2]);
+          $("span[name=today]:eq(1)").html(obj1[0][1]);
+          $("span[name=all]:eq(3)").html(obj1[1][2]);
+          $("span[name=today]:eq(3)").html(obj1[1][1]);
+          $("span[name=all]:eq(4)").html(obj1[2][2]);
+          $("span[name=today]:eq(4)").html(obj1[2][1]);
+        }
+    })
+
+  //模块监测
+   $.ajax({
+    　　url:'/realtime/service-status/'+session,
+        type: 'GET',
+        dataType:'json',
+        success:function(data){
+          var obj=data.results;
+          if(obj[0][1]==1){
+            $("div[name=modal]:eq(0)").addClass('point-green').removeClass('point-red');
+          }else{
+            $("div[name=modal]:eq(0)").addClass('point-red').removeClass('point-green');
+          }
+          if(obj[1][1]==1){
+            $("div[name=modal]:eq(1)").addClass('point-green').removeClass('point-red');
+          }else{
+            $("div[name=modal]:eq(1)").addClass('point-red').removeClass('point-green');
+          }
+          if(obj[2][1]==1){
+            $("div[name=modal]:eq(2)").addClass('point-green').removeClass('point-red');
+          }else{
+            $("div[name=modal]:eq(2)").addClass('point-red').removeClass('point-green');
+          }
+          if(obj[3][1]==1){
+            $("div[name=modal]:eq(3)").addClass('point-green').removeClass('point-red');
+          }else{
+            $("div[name=modal]:eq(3)").addClass('point-red').removeClass('point-green');
+          }
+        }
+    })
+</script>
+<script>
+</script>
+<script>
+  $.ajax({
+  　　url:'/realtime/sys-info/'+session,
+      type: 'GET',
+      dataType:'json',
+      success:function(data){
+        var obj=data.results;
+        var a=obj[1][0];
+        var b=obj[2][2];
+        var c=obj[3][2];
+        dash1(a);
+        dash2(b);
+        dash3(c);
+      }
+  })
+// chart1
+  function dash1(data){
+     var myChart_a = echarts.init(document.getElementById('chart1'));
+        option_a = {
+         tooltip : {
+            formatter: "{a} <br/>{b} : {c}%"
+         },
+         series : [
+             {
+                name:'速度',
+                type:'gauge',
+                center : ['44%', '50%'],
+                // min:0,
+                // max:220,
+                // splitNumber:11,
+                radius: '80%',
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+                        width: 3,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                   show:false
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :15,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :25,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {           // 分隔线
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontSize: 20,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail : {
+                   textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                      fontWeight: 'bolder',
+                      fontSize: 16,
+                   }
+                },
+                data:[{value: data, name: 'CPU(%)'}]
+             },
+          ]
+      };
+      myChart_a.setOption(option_a);
+        setInterval(function () {
+          $.ajax({
+        　　url:'/realtime/sys-info/'+session,
+            type: 'GET',
+            dataType:'json',
+            success:function(data){
+              var obj=data.results;
+              var a=obj[1][0];
+              var b=obj[2][2];
+              var c=obj[3][2];
+              option_a.series[0].data[0].value = a;
+              myChart_a.setOption(option_a, true);
+            }
+          })
+      },10000);
+     window.onresize = myChart_a.resize;
+  }
+
+// chart2
+  function dash2(data){
+     var myChart_b = echarts.init(document.getElementById('chart2'));
+        option_b = {
+         tooltip : {
+            formatter: "{a} <br/>{b} : {c}%"
+         },
+         series : [
+             {
+                name:'速度',
+                type:'gauge',
+                center : ['44%', '50%'],
+                min:0,
+                max:220,
+                splitNumber:11,
+                radius: '80%',
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+                        width: 3,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :15,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                   show:false
+                },
+                splitLine: {           // 分隔线
+                    length :25,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {           // 分隔线
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontSize: 20,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail : {
+                   textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                      fontWeight: 'bolder',
+                      fontSize: 16,
+                   }
+                },
+                data:[{value: data, name: '内存(%)'}]
+             },
+          ]
+      };
+      setInterval(function () {
+        $.ajax({
+        　　url:'/realtime/sys-info/'+session,
+            type: 'GET',
+            dataType:'json',
+            success:function(data){
+              var obj=data.results;
+              console.log(obj);
+              var a=obj[1][0];
+              var b=obj[2][2];
+              var c=obj[3][2];
+              option_b.series[0].data[0].value = b;
+              console.log(b);
+              myChart_b.setOption(option_b, true);
+            }
+          })
+      },11000);
+     myChart_b.setOption(option_b);
+     window.onresize = myChart_b.resize;
+  }
+
+// chart3
+  function dash3(data){
+     var myChart_c = echarts.init(document.getElementById('chart3'));
+        option_c = {
+         tooltip : {
+            formatter: "{a} <br/>{b} : {c}%"
+         },
+         series : [
+             {
+                name:'速度',
+                type:'gauge',
+                center : ['44%', '50%'],
+                min:0,
+                max:220,
+                splitNumber:11,
+                radius: '80%',
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+                        width: 3,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :15,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                   show:false
+                },
+                splitLine: {           // 分隔线
+                    length :25,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {           // 分隔线
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontSize: 20,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail : {
+                   textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                      fontWeight: 'bolder',
+                      fontSize: 16,
+                   }
+                },
+                data:[{value: data, name: '硬盘(%)'}]
+             },
+          ]
+      };
+      setInterval(function () {
+         $.ajax({
+        　　url:'/realtime/sys-info/'+session,
+            type: 'GET',
+            dataType:'json',
+            success:function(data){
+              var obj=data.results;
+              var a=obj[1][0];
+              var b=obj[2][2];
+              var c=obj[3][2];
+              option_c.series[0].data[0].value = c;
+              console.log(c);
+              myChart_c.setOption(option_c, true);
+            }
+          })
+      },12000);
+     myChart_c.setOption(option_c);
+     window.onresize = myChart_c.resize;
+  }
+</script>
+<script>
+// chart4
+  // chart4();
+  // function chart4(){
+    // myChart.clear();
+    var myChart= echarts.init(document.getElementById('chart4'));
+    var setop;
+    var serop1;
+    $.ajax({
+      　　url:'/realtime/flow-current/'+session,
+          type:'GET',
+          dataType:'json',
+          success:function(data){
+            var obj=data.results;
+            var time=[];
+            var data_t=[];
+            var last=obj[5][0];
+            for(var i=0;i<obj.length;i++){
+              var a=obj[i][0];
+              var n=a.substring(8,10);
+              var m=a.substring(10,12);
+              var f=a.substring(12,14);
+              var a_n=String(n+":"+m+":"+f);
+              time.push(a_n);
+              data_t.push(obj[i][1]);
+            }
+
+            op(time,data_t,last);
+          }
+    })
+    function op(time,data,last){
+        option_d = {
+            title: {
+                // text: '折线图堆叠'
+            },
+            grid: {
+                left: '3%',
+                right: '1%',
+                bottom: '3%',
+                containLabel: true,
+                width:'80%',
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: time,
+                axisLine: {
+                   lineStyle: {
+                      color: '#4bffff'
+                   }
+                },
+                axisLabel: {
+                   textStyle: {
+                      color: '#4bffff'
+                   }
+                },
+                axisTick: {
+                   lineStyle: {
+                      color: '#4bffff'
+                   }
+                }
+            },
+            yAxis: {
+              type: 'value',
+              splitLine: {
+                show: false
+              },
+              axisLine: {
+                  lineStyle: {
+                    color: '#4bffff'
+                  }
+                },
+                axisLabel: {
+                  textStyle: {
+                    color: '#4bffff'
+                  }
+                },
+                axisTick: {
+                  lineStyle: {
+                    color: '#4bffff'
+                  }
+                }
+            },
+            series: [
+                {
+                    name:'邮件营销',
+                    type:'line',
+                    stack: '总量',
+                    data:data
+                },
+            ]
+      };
+      setop=setInterval(function () {
+        $.ajax({
+          　　url:'/realtime/flow-current/'+session,
+              type:'GET',
+              dataType:'json',
+              data:{_latest_time:last},
+              success:function(ob){
+                var obj=ob.results;
+                for(var i=0;i<obj.length;i++){
+                  var a=obj[i][0];
+                  var n=a.substring(8,10);
+                  var m=a.substring(10,12);
+                  var f=a.substring(12,14);
+                  var a_n=String(n+":"+m+":"+f);
+                  data.shift();
+                  time.shift();
+                  data.push(obj[i][1]);
+                  time.push(a_n);
+                  last=obj[i][0];
+                }
+                myChart.setOption({
+                    xAxis: {
+                        data: time
+                    },
+                    series: [{
+                        type:'line',
+                        data: data
+                    }]
+                });
+              }
+          })
+      },10000)
+      myChart.setOption(option_d,true);
+  }
+    //初始结束
+    // 即时流量获取
+    $("#char_hor").click(function(){
+          $("#char_hor").addClass('char-ac');
+          $("#char_day").removeClass('char-ac');
+           window.clearInterval(setop1);
+          $.ajax({
+          　　url:'/realtime/flow-current/'+session,
+              type:'GET',
+              dataType:'json',
+              success:function(data){
+                var obj=data.results;
+                console.log(obj);
+                var time=[];
+                var data_t=[];
+                var last=obj[5][0];
+                for(var i=0;i<obj.length;i++){
+                  var a=obj[i][0];
+                  var n=a.substring(8,10);
+                  var m=a.substring(10,12);
+                  var f=a.substring(12,14);
+                  var a_n=String(n+":"+m+":"+f);
+                  console.log(a_n);
+                  time.push(a_n);
+                  data_t.push(obj[i][1]);
+                }
+                console.log(time);
+                console.log(data_t);
+                op(time,data_t,last);
+              }
+          })
+    })
+    //小时数据获取结束
+    //统计流量获取
+    $("#char_day").click(function(){
+          $("#char_day").addClass('char-ac');
+          $("#char_hor").removeClass('char-ac');
+          window.clearInterval(setop);
+          var data_p=[];
+          var data_s=[];
+          var time_s=[];
+          var last_time;
+          $.ajax({
+          　　url:'/realtime/flow-avg-flow-day/'+session,
+              type:'GET',
+              dataType:'json',
+              success:function(data){
+                var obj1=data.results[0];
+                var obj2=data.results[1];
+                for(var i=1;i<obj1.length;i++){
+                  data_p.push(obj1[i][1]);
+                }
+                for(var i=0;i<obj2.length;i++){
+                  var a=obj2[i][0];
+                  var n=a.substring(8,10);
+                  var m=a.substring(10,12);
+                  var a_n=String(n+":"+m);
+                  time_s.push(a_n);
+                  data_s.push(obj2[i][1]);
+                  last_time=obj2[i][0];
+                }
+                op_d(data_p,data_s,time_s,last_time);
+              }
+          })
+      function op_d(data_p,data_s,time_s,last_time){
+          option_d = {
+            title: {
+                // text: '折线图堆叠'
+            },
+            color: [
+                 'rgba(0,166,90,1)','rgba(255,0,0,1)'
+             ],
+            grid: {
+                left: '3%',
+                right: '1%',
+                bottom: '3%',
+                containLabel: true,
+                width:'80%',
+            },
+            legend: {
+                data:['平均值','统计值'],
+                textStyle: {
+                    color: 'rgba(75,255,255,0.7)',
+                    fontSize:14
+                  }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data:time_s,
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                     lineStyle: {
+                        color: '#4bffff'
+                     }
+                  },
+                  axisLabel: {
+                    interval:0,
+                    textStyle: {
+                      color: 'rgba(34,45,50,0)'
+                    }
+                  },
+                  axisTick: {
+                     show:false,
+                     lineStyle: {
+                        color: '#4bffff'
+                     }
+                  }
+            },
+            yAxis: {
+                type: 'value',
+                // boundaryGap: [0, '100%'],
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#4bffff'
+                    }
+                },
+                axisLabel: {
+                    textStyle: {
+                        color: '#4bffff'
+                    }
+                },
+                axisTick: {
+                    show:false,
+                    lineStyle: {
+                        color: '#4bffff'
+                    }
+                }
+            },
+            series: [
+                {
+                  name: '统计值',
+                  type: 'line',
+                  symbol:'none',
+                  data: data_s
+                },
+                {
+                  name: '平均值',
+                  type: 'line',
+                  symbol:'none',
+                  data: data_p
+                }
+            ]
+          };
+        setop1=setInterval(function () {
+          $.ajax({
+          　　url:'/realtime/flow-day/'+session,
+              type:'GET',
+              dataType:'json',
+              data:{_latest_time:last_time},
+              success:function(data){
+                var obj=data.results;
+                console.log(obj);
+                for(var i=0;i<obj.length;i++){
+                  var a=obj[i][0];
+                  var n=a.substring(8,10);
+                  var m=a.substring(10,12);
+                  var a_n=String(n+":"+m);
+                  time_s.push(a_n);
+                  data_s.push(obj[i][1]);
+                  last_time=obj[i][0];
+                }
+                myChart.setOption({
+                  xAxis: {
+                        data: time_s
+                  },
+                  series: [
+                    {
+                      name: '统计值',
+                      type: 'line',
+                      symbol:'none',
+                      data: data_s
+                    }
+                  ]
+                });
+              }
+          })
+          }, 10000);
+         myChart.clear();
+         myChart.setOption(option_d,true);
+      }
+    })
+    //日数据获取结束
+    window.onresize = myChart.resize;
+  // }
+</script>
+<script>
+//chart5
+  var myChart_e = echarts.init(document.getElementById('chart5'));
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+         color: [
+          'rgba(60,141,188,1)', 'rgba(245,105,84,1)', 'rgba(0,166,90,1)','rgba(255,133,27,1)','rgba(142,36,170,1)','rgba(243,156,18,1)'
+       ],
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data:['NetBIOS','LLMNR','SSDP','DNS','SSL','HTTP','Unknown'],
+            textStyle: {
+              color: 'rgba(75,255,255,1)'
+           }
+        },
+        series: [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius: ['50%', '85%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:335, name:'NetBIOS'},
+                    {value:310, name:'LLMNR'},
+                    {value:234, name:'SSDP'},
+                    {value:135, name:'DNS'},
+                    {value:448, name:'SSL'},
+                    {value:148, name:'HTTP'},
+                    {value:248, name:'Unknown'},
+                ]
+            }
+        ]
+    };
+
+   myChart_e.setOption(option);
+   window.onresize = myChart_e.resize;
+</script>
+<script>
+//疑似数据泄漏
+  var total = 0;
+  function addRow() {  
+      var tb = document.getElementById('tb'); 
+      var tr = tb.insertRow(0);  
+      var td = tr.insertCell(0);
+      var td1 = tr.insertCell(1);
+      var td2 = tr.insertCell(2);
+      var td3 = tr.insertCell(3);
+      var td4 = tr.insertCell(4);
+      // var td5 = tr.insertCell(4);
+      td.innerHTML = '201708'+total;
+      td1.innerHTML = '交通';
+      td2.innerHTML = '192.0.0.'+total;
+      td3.innerHTML = '127.0.0.'+total;
+      td4.innerHTML = '44'+total;
+      var l = tb.rows.length; 
+      if (l >= 12) {  
+         tr = tb.rows[12];  
+         tr.parentNode.removeChild(tr);  
+      }  
+      total++;  
+   }
+   setInterval(function () {
+           addRow();
+        },500);
+</script>
+</html>

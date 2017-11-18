@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jtopo测试页面</title>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+     <!-- 右测栏目 Jtopo--> <!-- <link rel="stylesheet" type="text/css" href="/static/jtopot/css/base.css">-->
+	<script src="/static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/static/jtopot/js/jtopo-min.js"></script>
+	<script type="text/javascript" src="/static/jtopot/js/toolbar.js"></script>
+
+    <!-- 左侧表单栏目 --->
+    <link rel="stylesheet" type="text/css" href="/static/jtopot/form/css/style.css">
+    <script src="/static/jtopot/form/js/jquery.mousewheel.min.js"></script>
+    <script src="/static/jtopot/form/js/increment.js"></script>
+
+    <!-- 模态框依赖脚本 -->
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="text-align: center"> Jtopo 测试模板, 调整边距等</h1>
+
+    {% include "jtopot/demo/models.html"%}
+
+
+     <div class="row">
+
+        <div class="col-md-4" style="background-color: #dedef8; box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            {% include "jtopot/demo/form.html" %}
+
+            <h3> 在正式使用的时候; 摸索出最好的比例这个栏将会被撤除 </h3>
+        </div>
+
+
+        <div class="col-md-8" style="">
+            <div id="content">
+                    <canvas width="950" height="750" id="canvas"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script id='code' src="/static/jtopot/js/demo.js"></script>
+</div>
+</body>
+</html>
